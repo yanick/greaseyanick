@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           RtSeverityOrdering
-// @version        0.04
+// @version        0.05
 // @author         Yanick Champoux <yanick+gm@babyl.dyndns.org>
 // @namespace      http://babyl.dyndns.org/
 // @description    Order RT bugs by severity
@@ -9,6 +9,9 @@
 // ==/UserScript==
 //
 // Changes
+// 0.05 - Dec 31, 2007
+// * put duct-tape over the id=\nXXX behavior of RT
+//
 // 0.04 - Dec 8, 2007
 // * clicking a second time gives a reverse ordering
 //
@@ -20,6 +23,16 @@
 //
 // 0.01 - Nov 26, 2007
 // * initial release
+
+// first, let's fix those pesky \n in the href
+var links = document.evaluate( "//a[@href]", document, 
+                   null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE,
+                   null );
+
+for ( var i = 0; i < links.snapshotLength; i++ ) {
+    links.snapshotItem(i).href = 
+        links.snapshotItem(i).href.replace( /id=\n/, "id=" );
+}
 
 
 var table = document.getElementsByTagName( 'table' )[0];
