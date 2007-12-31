@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           RtSeverityOrdering
-// @version        0.03
+// @version        0.04
 // @author         Yanick Champoux <yanick+gm@babyl.dyndns.org>
 // @namespace      http://babyl.dyndns.org/
 // @description    Order RT bugs by severity
@@ -9,6 +9,9 @@
 // ==/UserScript==
 //
 // Changes
+// 0.04 - Dec 8, 2007
+// * clicking a second time gives a reverse ordering
+//
 // 0.03 - Nov 27, 2007
 // * adding 'Critical' level
 //
@@ -23,6 +26,8 @@ var table = document.getElementsByTagName( 'table' )[0];
 var rows = table.rows;
 var header_row = rows[0];
 
+var ordering = 1;  // 1 => normal ordering, -1 => reverse
+
 if ( header_row.cells[3].innerHTML.match( /Severity/ ) ) {
         header_row.cells[3].innerHTML = 
             "<a id='orderSeverity' href='#dummy'>Severity</a>";
@@ -33,6 +38,7 @@ document.addEventListener( 'click', function( event ) {
         return;
     }
     order_by_severity();
+    ordering *= -1;
     event.stopPropagation();
     event.preventDefault();
 }, true );
@@ -59,11 +65,7 @@ function order_by_severity() {
 }
 
 function by_severity( a, b ) {
-    var sev_a = severity_level( a );
-    var sev_b = severity_level( b );
-
-    // GM_log( "sev: " + sev_a + " " + sev_b );
-    return sev_b - sev_a;
+    return ordering * ( severity_level( b ) - severity_level( a ) );
 }
 
 function severity_level( row ) {
