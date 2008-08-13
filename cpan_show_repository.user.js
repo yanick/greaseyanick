@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           CPAN_Show_Repository
-// @version        0.01
+// @version        0.02
 // @author         Yanick Champoux <yanick+gm@babyl.dyndns.org>
 // @namespace      http://babyl.dyndns.org/
 // @description    Show the distro's repository, if given in Meta.yml
@@ -8,6 +8,9 @@
 // ==/UserScript==
 //
 // Changes
+// 0.02 - Aug 12, 2008
+// * Comment out the GM_log
+//
 // 0.01 - Aug 12, 2008
 // * Initial release
 //
@@ -18,7 +21,7 @@ for each ( a in document.getElementsByTagName( 'a' ) ) {
             method: "GET",
             url: a.href,
             onload: function( resp ) {
-               GM_log( resp.responseText );
+               // GM_log( resp.responseText );
                var result = resp.responseText.match( 
                     /repository:\s+(\S+)/
                 ); 
