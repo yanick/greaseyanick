@@ -8,6 +8,9 @@
 // ==/UserScript==
 //
 // Changes
+// 0.03 - Aug 13, 2008
+// * match on 'repository' in META.yml is now case-insensitive.
+//
 // 0.02 - Aug 12, 2008
 // * Comment out the GM_log
 //
@@ -23,7 +26,7 @@ for each ( a in document.getElementsByTagName( 'a' ) ) {
             onload: function( resp ) {
                // GM_log( resp.responseText );
                var result = resp.responseText.match( 
-                    /repository:\s+(\S+)/
+                    /repository:\s+(\S+)/i
                 ); 
 
                 var repo = result[1];
