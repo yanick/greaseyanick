@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           CPAN_Show_Repository
-// @version        0.02
+// @version        0.03
 // @author         Yanick Champoux <yanick+gm@babyl.dyndns.org>
 // @namespace      http://babyl.dyndns.org/
 // @description    Show the distro's repository, if given in Meta.yml
