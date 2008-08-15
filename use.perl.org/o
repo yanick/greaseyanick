@@ -1,5 +1,0 @@
-#!/usr/bin/perl
-
-$\ = "\n";
-print "hello";
-print $_ while <>;
