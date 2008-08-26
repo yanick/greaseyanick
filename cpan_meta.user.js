@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           CPAN_Meta
-// @version        0.01
+// @version        0.02
 // @author         Yanick Champoux <yanick+gm@babyl.dyndns.org>
 // @namespace      http://babyl.dyndns.org/
 // @description    Extract info from a distro's META.yml and display it on its CPAN page 
@@ -11,6 +11,10 @@
 //
 // 0.01 - Aug 14, 2008
 // * Initial release
+//
+// 0.02 - Aug 25, 2008
+// * Hhanging the new elements before the License (as Testers is not always
+// present)
 //
 
 for each ( a in document.getElementsByTagName( 'a' ) ) {
@@ -99,7 +103,7 @@ function add_summary_item ( title, content ) {
     var tables = document.getElementsByTagName( 'table' );
 
     tables[0].innerHTML = tables[0].innerHTML.replace( 
-        /<tr>\s*<td.*?>CPAN Testers/i, 
+        /<tr>\s*<td.*?>License/i, 
         "<tr><td class='label'>"
         + title + "</td>"
         + "<td class='cell' colspan='3'>"
